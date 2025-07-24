@@ -17,3 +17,5 @@ venv/
 *.swp
 *.bak
 *.tmp
+*.orig
+*.zip
