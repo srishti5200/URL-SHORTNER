@@ -1,4 +1,5 @@
 # app/main.py
+import os
 from flask import Flask, jsonify, request, redirect, render_template, url_for
 # Import URLManager and validate_url from utils.py
 from app.utils import URLManager, validate_url
@@ -94,5 +95,7 @@ def redirect_to_original(short_code):
         return jsonify({"error": "Short URL not found"}), 404
 
 if __name__ == '__main__':
-    # When running locally, debug=True provides useful information but should be False in production
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    # Use environment variable for PORT, default to 5000 for local development
+    # Also set debug=False for production best practice
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port, debug=False)
