@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Light gray background */
+        }
+        .container {
+            max-width: 800px;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+    <div class="container bg-white shadow-lg rounded-xl p-8 space-y-8 w-full">
+        <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">TinyURL</h1>
+
+        <!-- Shorten URL Form -->
+        <div class="bg-blue-50 p-6 rounded-lg shadow-sm">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Shorten a URL</h2>
+            <form id="shortenForm" class="space-y-4">
+                <input
+                    type="url"
+                    id="originalUrl"
+                    placeholder="Enter your long URL here (e.g., https://example.com/very/long/path)"
+                    required
+                    class="w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                >
+                <button
+                    type="submit"
+                    class="w-full bg-blue-600 text-white p-3 rounded-md font-semibold hover:bg-blue-700 transition duration-300 ease-in-out shadow-md"
+                >
+                    Shorten
+                </button>
+            </form>
+            <div id="result" class="mt-4 text-center text-gray-700"></div>
+        </div>
+
+        <!-- List All URLs Section -->
+        <div class="bg-green-50 p-6 rounded-lg shadow-sm">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">All Shortened URLs</h2>
+            <button
+                id="refreshUrls"
+                class="w-full bg-green-600 text-white p-3 rounded-md font-semibold hover:bg-green-700 transition duration-300 ease-in-out shadow-md mb-4"
+            >
+                Refresh List
+            </button>
+            <div id="urlListContainer" class="max-h-64 overflow-y-auto border border-gray-200 rounded-md p-3 bg-white">
+                <p id="noUrlsMessage" class="text-gray-500 text-center">No URLs shortened yet. Shorten one above!</p>
+                <ul id="urlList" class="space-y-2">
+                    <!-- URLs will be dynamically loaded here -->
+                </ul>
+            </div>
+        </div>
+
+        <!-- Message Box for Alerts (instead of alert()) -->
+        <div id="messageBox" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center p-4">
+            <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-sm text-center">
+                <p id="messageText" class="text-gray-800 text-lg font-medium mb-4"></p>
+                <button id="closeMessageBox" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300">
+                    OK
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom JavaScript -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
